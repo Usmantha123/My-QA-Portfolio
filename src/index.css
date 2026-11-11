@@ -161,28 +161,44 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   box-shadow: 4px 4px 0px 0px #b8f400;
 }
 
-/* Infinite Marquee Track */
-.marquee-container {
+/* ─── Infinite Marquee Animation ─── */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.marquee-wrapper {
   overflow: hidden;
   user-select: none;
   display: flex;
-  gap: 2rem;
+  width: 100%;
 }
 
-.marquee-content {
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.marquee-track {
   display: flex;
   flex-shrink: 0;
-  gap: 2rem;
+  gap: 1.5rem;
   align-items: center;
-  animation: marquee 28s linear infinite;
+  padding-right: 1.5rem;
+  animation: marquee-scroll 35s linear infinite;
+  will-change: transform;
 }
 
-.marquee-container:hover .marquee-content {
+.marquee-wrapper:hover .marquee-track {
   animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-content {
+  .marquee-track {
     animation: none;
   }
 }
