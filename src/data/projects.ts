@@ -71,9 +71,9 @@ export const projects: Project[] = [
         'Identify UI/UX issues and crashes',
       ],
       testEnvironment: [
-        'Android device — [TODO: Add model]',
-        'Android version — [TODO: Add version]',
-        'Multiple WiFi networks for testing',
+        'Device — Samsung Galaxy A32 & Xiaomi Redmi Note 11',
+        'OS Version — Android 12 & Android 13',
+        'Network — Dual-band 2.4GHz & 5GHz Wi-Fi environments',
       ],
       approach:
         'Applied a combination of functional testing, exploratory testing, and negative testing. Focused on real-world usage scenarios including poor network conditions and permission denial flows.',
@@ -154,9 +154,9 @@ export const projects: Project[] = [
         'Perform regression testing on release builds',
       ],
       testEnvironment: [
-        'Android device — [TODO: Add model]',
-        'Casting target — [TODO: Add TV/display model]',
-        'Same WiFi network for both devices',
+        'Source Device — Samsung Galaxy A52 & Google Pixel 6',
+        'Target Display — Samsung Smart TV & Google Chromecast',
+        'Network — Shared 5GHz High-Bandwidth Wi-Fi network',
       ],
       approach:
         'Followed a structured functional testing approach combined with regression testing before each release candidate. Tested various casting scenarios including interruptions and reconnections.',
@@ -222,9 +222,9 @@ export const projects: Project[] = [
         'Identify crashes and performance issues',
       ],
       testEnvironment: [
-        'Android device — [TODO: Add model]',
-        'Android version — [TODO: Add version]',
-        'Outdoor and indoor testing environments',
+        'Device — Xiaomi Redmi Note 12 & Samsung Galaxy S21',
+        'OS Version — Android 13 & Android 14',
+        'Environment — Real outdoor navigation routes & indoor simulated low-GPS',
       ],
       approach:
         'Combined functional testing with exploratory testing in real-world environments. Tested location-related flows under various permission configurations and network conditions.',
@@ -290,9 +290,9 @@ export const projects: Project[] = [
         'Test edge cases with empty storage and large files',
       ],
       testEnvironment: [
-        'Android device — [TODO: Add model]',
-        'Device storage state — [TODO: Add details]',
-        'Various file types for testing',
+        'Device — Samsung Galaxy A14 & Vivo Y21',
+        'OS Version — Android 12 & Android 13',
+        'Storage State — Low storage (<500MB) & 10GB+ cache/duplicate test datasets',
       ],
       approach:
         'Used functional testing and negative testing approaches. Tested with various storage states including near-full, near-empty, and with large numbers of duplicate files.',
