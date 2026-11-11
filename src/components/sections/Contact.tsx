@@ -15,7 +15,7 @@ export const Contact: React.FC = () => {
     <section id="contact" className="py-20 bg-surface relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Big Lime Card */}
-        <div className="rounded-[24px] bg-lime-accent text-dark-bg p-8 sm:p-12 lg:p-16 relative overflow-hidden shadow-[8px_8px_0px_0px_#24242b] border border-lime-dim">
+        <div className="rounded-[24px] bg-lime-accent text-dark-bg p-6 sm:p-12 lg:p-16 relative overflow-hidden shadow-[4px_4px_0px_0px_#24242b] sm:shadow-[8px_8px_0px_0px_#24242b] border border-lime-dim">
           {/* Subtle Background Accent Circle */}
           <div className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-black/5 pointer-events-none" />
 

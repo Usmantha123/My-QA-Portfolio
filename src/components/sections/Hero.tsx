@@ -80,7 +80,10 @@ export const Hero: React.FC = () => {
             {/* Short intro line */}
             <p className="text-base sm:text-lg lg:text-xl text-content-secondary max-w-2xl leading-relaxed">
               Hi, I&apos;m <strong className="text-content font-bold">{personalInfo.name}</strong> &mdash;{' '}
-              <span className="text-lime-accent font-semibold">SQA Engineer</span> specializing in web, mobile (Android), and API testing with Postman. I dig deep into edge cases so your production releases stay rock solid.
+              <span className="inline-block px-2.5 py-0.5 rounded-md font-mono font-bold text-xs sm:text-sm bg-lime-accent text-dark-bg shadow-sm tracking-wide align-middle">
+                SQA Engineer
+              </span>{' '}
+              specializing in web, mobile (Android), and API testing with Postman. I dig deep into edge cases so your production releases stay rock solid.
             </p>
 
             {/* Two Action Buttons */}
@@ -126,7 +129,7 @@ export const Hero: React.FC = () => {
           <div className="lg:col-span-5">
             <div className="relative mx-auto max-w-lg lg:max-w-none">
               {/* Terminal Container with offset lime shadow */}
-              <div className="rounded-[20px] bg-dark-surface border border-dark-border shadow-[8px_8px_0px_0px_#b8f400] overflow-hidden transition-all duration-300">
+              <div className="rounded-[20px] bg-dark-surface border border-dark-border shadow-[4px_4px_0px_0px_#b8f400] sm:shadow-[8px_8px_0px_0px_#b8f400] overflow-hidden transition-all duration-300">
                 {/* Traffic-Light Header */}
                 <div className="flex items-center justify-between px-4 py-3 bg-[#0d0d10] border-b border-dark-border">
                   <div className="flex items-center gap-2">

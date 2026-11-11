@@ -36,10 +36,14 @@
   --color-accent-text: #0a0a0c;
   --color-border: #e3e2dc;
   --color-border-hover: #c9c8bf;
-  --color-badge-bg: rgba(158, 219, 0, 0.18);
-  --color-badge-text: #456300;
+  --color-badge-bg: rgba(184, 244, 0, 0.25);
+  --color-badge-text: #273d00;
   --color-terminal-bg: #131317;
   --color-shadow-offset: #131317;
+}
+
+[data-theme="light"] .text-lime-accent {
+  color: #2e4700;
 }
 
 @media (prefers-color-scheme: light) {
@@ -56,10 +60,14 @@
     --color-accent-text: #0a0a0c;
     --color-border: #e3e2dc;
     --color-border-hover: #c9c8bf;
-    --color-badge-bg: rgba(158, 219, 0, 0.18);
-    --color-badge-text: #456300;
+    --color-badge-bg: rgba(184, 244, 0, 0.25);
+    --color-badge-text: #273d00;
     --color-terminal-bg: #131317;
     --color-shadow-offset: #131317;
+  }
+
+  :root:not([data-theme="dark"]) .text-lime-accent {
+    color: #2e4700;
   }
 }
 
