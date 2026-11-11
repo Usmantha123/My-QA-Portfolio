@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FileDown,
@@ -12,18 +12,14 @@ import {
   FileText,
   ShieldCheck,
   ChevronDown,
-  Camera,
-  Trash2,
 } from 'lucide-react';
 import { personalInfo } from '../../data/personal';
 import { Button } from '../ui/Button';
 
 export const Hero: React.FC = () => {
   const [titleIndex, setTitleIndex] = useState(0);
-  const [profileImage, setProfileImage] = useState<string>(() => {
-    return localStorage.getItem('user_profile_photo') || personalInfo.photoUrl || '';
-  });
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  // Profile image is set permanently via personalInfo.photoUrl (public/profile.jpg)
+  const profileImage = personalInfo.photoUrl || '';
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -31,28 +27,6 @@ export const Hero: React.FC = () => {
     }, 2800);
     return () => clearInterval(timer);
   }, []);
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setProfileImage(base64String);
-        localStorage.setItem('user_profile_photo', base64String);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleRemoveImage = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setProfileImage('');
-    localStorage.removeItem('user_profile_photo');
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-  };
 
   const scrollToProjects = () => {
     document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -144,26 +118,15 @@ export const Hero: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Profile Avatar / Photo with Interactive Upload */}
+        {/* Profile Avatar — Static Photo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="mx-auto mb-8 relative w-28 h-28 sm:w-32 sm:h-32 group cursor-pointer"
-          onClick={() => fileInputRef.current?.click()}
-          title="Click to upload/change your photo"
+          className="mx-auto mb-8 relative w-28 h-28 sm:w-32 sm:h-32"
         >
-          {/* Hidden File Input */}
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={handleImageUpload}
-          />
-
           {/* Profile Circle */}
-          <div className="relative w-full h-full rounded-full bg-surface-card p-1 border-2 border-divider flex items-center justify-center overflow-hidden shadow-lg group-hover:border-blue-500 transition-colors">
+          <div className="relative w-full h-full rounded-full bg-surface-card p-1 border-2 border-divider flex items-center justify-center overflow-hidden shadow-lg">
             {profileImage ? (
               <img
                 src={profileImage}
@@ -175,41 +138,13 @@ export const Hero: React.FC = () => {
                 TU
               </div>
             )}
-
-            {/* Hover Camera Overlay */}
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px] rounded-full flex flex-col items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
-              <Camera className="w-6 h-6 mb-1 text-blue-300" />
-              <span className="text-[10px] font-semibold tracking-wider uppercase">
-                {profileImage ? 'Change' : 'Upload'}
-              </span>
-            </div>
           </div>
 
           {/* Verification Badge */}
           <div className="absolute -bottom-1 -right-1 bg-surface-card p-1.5 rounded-full border border-divider shadow-md">
             <ShieldCheck className="w-5 h-5 text-blue-500" />
           </div>
-
-          {/* Remove Image Button (visible when image is present) */}
-          {profileImage && (
-            <button
-              onClick={handleRemoveImage}
-              title="Remove uploaded photo"
-              aria-label="Remove uploaded photo"
-              className="absolute -top-1 -right-1 bg-rose-500 hover:bg-rose-600 text-white p-1.5 rounded-full shadow-md transition-transform hover:scale-110 z-20"
-            >
-              <Trash2 className="w-3.5 h-3.5" />
-            </button>
-          )}
         </motion.div>
-
-        {/* Upload hint below photo */}
-        <p className="text-[11px] text-content-secondary -mt-6 mb-6">
-          <span className="text-blue-500 font-semibold cursor-pointer hover:underline" onClick={() => fileInputRef.current?.click()}>
-            Click avatar to upload your photo
-          </span>{' '}
-          (saves automatically in your browser)
-        </p>
 
         {/* Name Heading */}
         <motion.h1

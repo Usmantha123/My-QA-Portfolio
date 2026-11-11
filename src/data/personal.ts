@@ -36,7 +36,7 @@ export const personalInfo = {
   email: 'talhausman605@gmail.com',
   phone: '+92 301 9013402',
   linkedin: 'https://www.linkedin.com/in/talha-usman-usman',
-  github: 'https://github.com/',
+  github: 'https://github.com/Usmantha123',
   resumeUrl: '/resume.html',
   photoUrl: '',
   yearsOfExperience: '2+',
