@@ -38,6 +38,6 @@ export const personalInfo = {
   linkedin: 'https://www.linkedin.com/in/talha-usman-usman',
   github: 'https://github.com/Usmantha123',
   resumeUrl: '/resume.html',
-  photoUrl: '',
+  photoUrl: '/profile.jpg',
   yearsOfExperience: '2+',
 };
