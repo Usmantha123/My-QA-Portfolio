@@ -1,152 +1,161 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import {
-  Briefcase,
-  GraduationCap,
-  Award,
-  Calendar,
-  MapPin,
-  CheckCircle2,
-} from 'lucide-react';
-import { experiences, education, certifications } from '../../data/experience';
-import { SectionHeader } from '../ui/SectionHeader';
-import { Card } from '../ui/Card';
-import { Badge } from '../ui/Badge';
+import { Briefcase, GraduationCap, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
+import { education } from '../../data/experience';
+
+interface WorkItem {
+  id: string;
+  role: string;
+  company: string;
+  dates: string;
+  location: string;
+  isCurrent?: boolean;
+  description: string;
+  points: string[];
+}
+
+const WORK_EXPERIENCES: WorkItem[] = [
+  {
+    id: 'fyno',
+    role: 'SQA Engineer',
+    company: 'Fyno Technologies',
+    dates: 'Present',
+    location: 'Islamabad, Pakistan',
+    isCurrent: true,
+    description: 'Manual and API testing of mobile applications with ad integration, ensuring zero regressions across Android device builds.',
+    points: [
+      'Testing mobile applications that carry integrated ads, validating rendering across diverse Android devices.',
+      'Performing functional, regression, and API testing using Postman with a focus on fintech user flows.',
+      'Logging and tracking defects in JIRA and ClickUp, collaborating with devs for rapid bug triage.',
+    ],
+  },
+  {
+    id: 'bitech',
+    role: 'QA Engineer',
+    company: 'Bitech Pvt Ltd',
+    dates: 'From Apr 2026',
+    location: 'Islamabad, Pakistan',
+    isCurrent: false,
+    description: 'End-to-end quality assurance across web and mobile platforms with rigorous API and UI/UX test cycles.',
+    points: [
+      'Quality assurance across web and mobile platforms with end-to-end test execution.',
+      'API testing and validation using Postman and Swagger collections.',
+      'Sprint planning, test case authoring, and defect lifecycle management in JIRA.',
+    ],
+  },
+  {
+    id: 'khastech',
+    role: 'QA Engineer',
+    company: 'Khastech Solutions',
+    dates: 'Mar 2025 – Apr 2026',
+    location: 'Islamabad, Pakistan',
+    isCurrent: false,
+    description: 'Conducted manual testing of web and mobile apps, Postman API validation, and JIRA defect management in Scrum sprints.',
+    points: [
+      'Performed manual testing of web and mobile apps for UI/UX, functionality, and regression.',
+      'Conducted API testing with Postman; logged, tracked, and reported defects in JIRA.',
+      'Collaborated closely with developers and product teams for timely defect resolution in Scrum sprints.',
+    ],
+  },
+];
 
 export const Experience: React.FC = () => {
   return (
-    <section id="experience" className="py-20 relative bg-surface-secondary/20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeader
-          badge="BACKGROUND"
-          title="Experience &amp; Education"
-          subtitle="My professional career progression, academic background, and continuous QA learning."
-        />
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Work Experience */}
-          <div className="lg:col-span-7 flex flex-col">
-            <div className="flex items-center gap-2 mb-4 h-8">
-              <Briefcase className="w-5 h-5 text-blue-400" />
-              <h3 className="text-xl font-heading font-bold text-content leading-none">Work Experience</h3>
-            </div>
-
-            <div className="space-y-6">
-              {experiences.map((exp, index) => (
-                <motion.div
-                  key={exp.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                >
-                  <Card className="p-6 space-y-4">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <div className="space-y-0.5">
-                        <h4 className="font-heading font-bold text-lg text-content">
-                          {exp.role}
-                        </h4>
-                        <span className="text-sm font-semibold text-blue-500 block">
-                          {exp.company}
-                        </span>
-                      </div>
-                      {exp.isCurrent && (
-                        <Badge variant="primary" size="sm">
-                          Current Role
-                        </Badge>
-                      )}
-                    </div>
-
-                    <div className="flex flex-wrap items-center gap-4 text-xs text-content-secondary">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5" />
-                        {exp.startDate === exp.endDate ? exp.startDate : `${exp.startDate} — ${exp.endDate}`}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5" />
-                        {exp.location}
-                      </span>
-                    </div>
-
-                    <ul className="space-y-2 text-xs sm:text-sm text-content-secondary pt-3 border-t border-divider">
-                      {exp.responsibilities.map((resp, i) => (
-                        <li key={i} className="flex items-start gap-2.5">
-                          <CheckCircle2 className="w-4 h-4 text-blue-400 shrink-0 mt-0.5" />
-                          <span className="leading-relaxed">{resp}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
+    <section id="experience" className="py-20 bg-surface relative">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
+        {/* Section Header */}
+        <div className="space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-divider text-xs font-mono font-semibold text-lime-accent">
+            <Briefcase className="w-3.5 h-3.5" />
+            <span>CAREER TIMELINE</span>
           </div>
+          <h2 className="text-3xl sm:text-5xl font-heading font-extrabold text-content tracking-[-2px]">
+            Work Experience &amp; Education
+          </h2>
+          <p className="text-sm sm:text-base text-content-secondary max-w-xl">
+            Hands-on QA engineering roles delivering reliable web, mobile, and API releases across fast-paced environments.
+          </p>
+        </div>
 
-          {/* Right Column: Education & Certifications */}
-          <div className="lg:col-span-5 flex flex-col space-y-8">
-            {/* Education */}
-            <div>
-              <div className="flex items-center gap-2 mb-4 h-8">
-                <GraduationCap className="w-5 h-5 text-purple-400" />
-                <h3 className="text-xl font-heading font-bold text-content leading-none">Education</h3>
+        {/* Experience Row Cards */}
+        <div className="space-y-4 sm:space-y-6">
+          {WORK_EXPERIENCES.map((job) => (
+            <div
+              key={job.id}
+              className={`qa-card p-6 sm:p-8 flex flex-col lg:flex-row lg:items-start justify-between gap-6 ${
+                job.isCurrent ? 'border-lime-accent/40 bg-surface-card' : ''
+              }`}
+            >
+              {/* Left Column: Dates & Current Tag */}
+              <div className="lg:w-64 shrink-0 space-y-2">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4 text-lime-accent" />
+                  <span className="font-mono text-xs sm:text-sm font-bold text-content">
+                    {job.dates}
+                  </span>
+                  {job.isCurrent && (
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-mono font-black bg-lime-accent text-dark-bg tracking-wide uppercase">
+                      Current
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-1.5 text-xs text-content-secondary">
+                  <MapPin className="w-3.5 h-3.5 text-content-muted" />
+                  <span>{job.location}</span>
+                </div>
               </div>
 
-              <div className="space-y-4">
-                {education.map((edu) => (
-                  <Card key={edu.id} className="p-6 space-y-3 border-l-4 border-l-purple-500">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs text-content-secondary flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5" />
-                        {edu.startYear} &mdash; {edu.endYear}
-                      </span>
-                      {edu.location && (
-                        <span className="text-xs text-content-secondary flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5" />
-                          {edu.location}
-                        </span>
-                      )}
-                    </div>
-                    <div>
-                      <h4 className="font-heading font-bold text-base text-content">{edu.degree}</h4>
-                      <p className="text-sm font-semibold text-purple-400 mt-0.5">{edu.institution}</p>
-                    </div>
-                    {edu.description && (
-                      <p className="text-xs text-content-secondary pt-2 border-t border-divider leading-relaxed">
-                        {edu.description}
-                      </p>
-                    )}
-                  </Card>
-                ))}
+              {/* Middle/Right Column: Role, Company, Description & Bullet points */}
+              <div className="flex-1 space-y-3">
+                <div className="flex flex-wrap items-baseline gap-2">
+                  <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-content tracking-tight">
+                    {job.role}
+                  </h3>
+                  <span className="text-sm sm:text-base font-semibold text-lime-accent font-mono">
+                    &bull; {job.company}
+                  </span>
+                </div>
+
+                <p className="text-sm text-content-secondary font-medium leading-relaxed">
+                  {job.description}
+                </p>
+
+                <ul className="space-y-2 pt-2 text-xs sm:text-sm text-content-secondary">
+                  {job.points.map((point, index) => (
+                    <li key={index} className="flex items-start gap-2.5">
+                      <CheckCircle2 className="w-4 h-4 text-lime-accent shrink-0 mt-0.5" />
+                      <span className="leading-relaxed">{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
+          ))}
+        </div>
 
-            {/* Certifications */}
-            <div>
-              <div className="flex items-center gap-2 mb-4 h-8">
-                <Award className="w-5 h-5 text-emerald-400" />
-                <h3 className="text-xl font-heading font-bold text-content leading-none">Certifications</h3>
+        {/* Education Card */}
+        <div className="pt-4">
+          <div className="qa-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 border-l-4 border-l-lime-accent">
+            <div className="space-y-2">
+              <div className="flex items-center gap-2 text-xs font-mono text-lime-accent font-bold">
+                <GraduationCap className="w-4 h-4" />
+                <span>ACADEMIC BACKGROUND &bull; 2020 &mdash; 2024</span>
               </div>
+              <h3 className="text-xl sm:text-2xl font-heading font-extrabold text-content tracking-tight">
+                BS Software Engineering
+              </h3>
+              <p className="text-sm font-semibold text-content-secondary">
+                Islamia College Peshawar (Chartered University) &bull; Peshawar, Pakistan
+              </p>
+              <p className="text-xs text-content-secondary max-w-2xl leading-relaxed pt-1">
+                {education[0]?.description ||
+                  'Comprehensive study of software testing fundamentals, Software Quality Assurance, SDLC/STLC methodologies, and database systems.'}
+              </p>
+            </div>
 
-              {certifications.length > 0 ? (
-                certifications.map((cert) => (
-                  <Card key={cert.id} className="p-6 space-y-1">
-                    <h4 className="font-heading font-bold text-sm text-content">{cert.title}</h4>
-                    <p className="text-xs text-emerald-400">{cert.issuer} &bull; {cert.date}</p>
-                  </Card>
-                ))
-              ) : (
-                <Card className="p-6 text-center space-y-2 border-dashed">
-                  <div className="w-10 h-10 rounded-full bg-surface-secondary text-content-secondary flex items-center justify-center mx-auto mb-2">
-                    <Award className="w-5 h-5" />
-                  </div>
-                  <h4 className="font-heading font-semibold text-sm text-content">
-                    Certifications in Progress
-                  </h4>
-                  <p className="text-xs text-content-secondary max-w-xs mx-auto leading-relaxed">
-                    Preparing for industry-standard QA certifications (ISTQB Foundation Level &amp; Postman API testing).
-                  </p>
-                </Card>
-              )}
+            <div className="shrink-0">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-secondary border border-divider text-xs font-mono font-semibold text-content">
+                <span>Graduated 2024</span>
+              </span>
             </div>
           </div>
         </div>

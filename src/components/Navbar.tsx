@@ -1,27 +1,20 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, FileDown, CheckCircle } from 'lucide-react';
+import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
-import { useActiveSection } from '../hooks/useActiveSection';
 import { personalInfo } from '../data/personal';
-import { Button } from './ui/Button';
 
-const NAV_LINKS = [
-  { name: 'Home', href: '#home', id: 'home' },
-  { name: 'About', href: '#about', id: 'about' },
-  { name: 'Skills', href: '#skills', id: 'skills' },
-  { name: 'Projects', href: '#projects', id: 'projects' },
-  { name: 'QA Process', href: '#qa-process', id: 'qa-process' },
-  { name: 'Experience', href: '#experience', id: 'experience' },
-  { name: 'Contact', href: '#contact', id: 'contact' },
+const navItems = [
+  { name: 'About', href: '#about' },
+  { name: 'Services', href: '#services' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Contact', href: '#contact' },
 ];
 
 export const Navbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
-  const activeSection = useActiveSection();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
     const target = document.querySelector(href);
@@ -31,135 +24,104 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4">
-        <nav className="glass rounded-2xl px-4 sm:px-6 py-3 flex items-center justify-between border border-divider shadow-lg shadow-black/5">
-          {/* Logo */}
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-surface/80 border-b border-divider transition-colors duration-200">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-18 items-center justify-between py-3">
+          {/* Logo: "TU Talha Usman" with TU in lime badge */}
           <a
             href="#home"
-            onClick={(e) => scrollToSection(e, '#home')}
-            className="flex items-center gap-3 group"
+            onClick={(e) => handleNavClick(e, '#home')}
+            className="flex items-center gap-2.5 group"
+            aria-label="Talha Usman Homepage"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-violet-600 flex items-center justify-center font-heading font-bold text-white text-base shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-lime-accent text-dark-bg font-mono font-black text-xs tracking-tight shadow-[2px_2px_0px_#24242b] group-hover:scale-105 transition-transform">
               TU
-            </div>
-            <div className="hidden sm:block">
-              <span className="font-heading font-bold text-content text-base tracking-tight block">
-                {personalInfo.name}
-              </span>
-              <span className="text-xs text-content-secondary flex items-center gap-1">
-                <CheckCircle className="w-3 h-3 text-emerald-500 inline" />
-                QA Engineer
-              </span>
-            </div>
+            </span>
+            <span className="font-heading font-extrabold text-content text-base sm:text-lg tracking-tight">
+              Talha Usman
+            </span>
+            <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-surface-card border border-divider text-content-secondary">
+              SQA
+            </span>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-1 bg-surface-secondary/40 p-1 rounded-xl border border-divider/50">
-            {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.id;
-              return (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 relative ${
-                    isActive
-                      ? 'text-white font-semibold'
-                      : 'text-content-secondary hover:text-content hover:bg-white/5'
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeNavIndicator"
-                      className="absolute inset-0 bg-gradient-to-r from-blue-600 to-violet-600 rounded-lg -z-10 shadow-sm"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
-                  )}
-                  {link.name}
-                </a>
-              );
-            })}
-          </div>
+          {/* Desktop Nav Links */}
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className="px-3.5 py-1.5 rounded-full text-sm font-medium text-content-secondary hover:text-content hover:bg-surface-card/60 transition-colors"
+              >
+                {item.name}
+              </a>
+            ))}
+          </nav>
 
-          {/* Actions: Theme Toggle & Resume */}
-          <div className="flex items-center gap-2">
+          {/* Right Actions: Theme Toggle + Hire Me Pill */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              aria-label="Toggle color theme"
-              className="p-2 rounded-xl text-content-secondary hover:text-content hover:bg-surface-secondary border border-transparent hover:border-divider transition-all"
+              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              className="p-2 rounded-xl bg-surface-card border border-divider text-content-secondary hover:text-content transition-colors"
             >
               {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400" />
+                <Sun className="w-4 h-4 text-amber-300" />
               ) : (
-                <Moon className="w-4 h-4 text-blue-500" />
+                <Moon className="w-4 h-4 text-slate-700" />
               )}
             </button>
 
-            <Button
-              href={personalInfo.resumeUrl}
-              target="_blank"
-              variant="outline"
-              size="sm"
-              icon={<FileDown className="w-3.5 h-3.5" />}
-              className="hidden sm:inline-flex"
+            {/* Lime "Hire me" pill button */}
+            <a
+              href="#contact"
+              onClick={(e) => handleNavClick(e, '#contact')}
+              className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full bg-lime-accent text-dark-bg font-heading font-bold text-xs sm:text-sm shadow-lime-offset hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all active:scale-95"
             >
-              Resume
-            </Button>
+              <span>Hire me</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
 
-            {/* Mobile Menu Toggle */}
+            {/* Mobile Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle mobile menu"
-              className="md:hidden p-2 rounded-xl text-content-secondary hover:text-content hover:bg-surface-secondary border border-transparent hover:border-divider"
+              aria-label="Toggle navigation menu"
+              className="p-2 rounded-xl md:hidden bg-surface-card border border-divider text-content hover:text-lime-accent transition-colors"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
-        </nav>
-      </div>
+        </div>
 
-      {/* Mobile Drawer Menu */}
-      <AnimatePresence>
+        {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="md:hidden mx-4 mt-2 p-4 glass rounded-2xl border border-divider shadow-2xl"
-          >
-            <div className="flex flex-col gap-1">
-              {NAV_LINKS.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => scrollToSection(e, link.href)}
-                  className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                    activeSection === link.id
-                      ? 'bg-gradient-to-r from-blue-600/20 to-violet-600/20 text-blue-400 font-semibold border border-blue-500/30'
-                      : 'text-content-secondary hover:text-content hover:bg-surface-secondary'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              ))}
-              <div className="pt-3 mt-2 border-t border-divider flex items-center justify-between">
-                <span className="text-xs text-content-secondary">Resume / CV</span>
-                <Button
-                  href={personalInfo.resumeUrl}
-                  target="_blank"
-                  variant="primary"
-                  size="sm"
-                  icon={<FileDown className="w-3.5 h-3.5" />}
-                >
-                  Download
-                </Button>
-              </div>
+          <div className="md:hidden py-4 border-t border-divider space-y-2 animate-in fade-in slide-in-from-top-2 duration-150">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+                className="block px-4 py-2.5 rounded-xl text-sm font-semibold text-content hover:bg-surface-card hover:text-lime-accent transition-colors"
+              >
+                {item.name}
+              </a>
+            ))}
+            <div className="pt-2">
+              <a
+                href={personalInfo.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-mono font-semibold bg-surface-card border border-divider text-content-secondary hover:text-content"
+              >
+                <span>LinkedIn Profile</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </div>
     </header>
   );
 };
-
