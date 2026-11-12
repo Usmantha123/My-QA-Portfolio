@@ -233,3 +233,40 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 [data-theme="light"] .qa-grid-bg {
   background-image: radial-gradient(rgba(19, 19, 23, 0.08) 1px, transparent 1px);
 }
+
+/* ─── Profile 3D Floating Frame & Badge ─── */
+@keyframes profile-frame-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+}
+
+@keyframes badge-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.profile-floating-frame {
+  animation: profile-frame-float 4.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.badge-floating {
+  animation: badge-float 3.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-floating-frame,
+  .badge-floating {
+    animation: none !important;
+    transform: rotate(-2deg) !important;
+  }
+}
