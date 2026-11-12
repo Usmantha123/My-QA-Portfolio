@@ -18,7 +18,7 @@ const WORK_EXPERIENCES: WorkItem[] = [
     id: 'fyno',
     role: 'SQA Engineer',
     company: 'Fyno Technologies',
-    dates: 'Present',
+    dates: '1 July 2026 — Present',
     location: 'Islamabad, Pakistan',
     isCurrent: true,
     description: 'Manual and API testing of mobile applications with ad integration, ensuring zero regressions across Android device builds.',

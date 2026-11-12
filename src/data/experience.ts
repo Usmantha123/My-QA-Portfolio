@@ -37,7 +37,7 @@ export const experiences: ExperienceEntry[] = [
     id: 'exp-1',
     role: 'SQA Engineer',
     company: 'Fyno Technologies',
-    startDate: 'Present',
+    startDate: '1 July 2026',
     endDate: 'Present',
     location: 'Islamabad, Pakistan',
     responsibilities: [
