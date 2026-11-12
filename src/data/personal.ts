@@ -30,7 +30,7 @@ export const personalInfo = {
     'Bug Reporting',
     'Regression Testing',
   ],
-  tools: ['Postman', 'Swagger', 'JIRA', 'ClickUp'],
+  tools: ['Postman', 'JIRA', 'ClickUp'],
   highlights: [
     'Web Testing',
     'Mobile (Android) Testing',
@@ -46,6 +46,6 @@ export const personalInfo = {
   linkedin: 'https://www.linkedin.com/in/talha-usman-usman/',
   github: 'https://github.com/Usmantha123',
   resumeUrl: '/resume.html',
-  photoUrl: '/profile.jpg',
+  photoUrl: '/profile.jpg?v=2',
   yearsOfExperience: '2+',
 };
