@@ -79,3 +79,4 @@ export const HeroProfileFrame: React.FC = () => {
     </div>
   );
 };
+
