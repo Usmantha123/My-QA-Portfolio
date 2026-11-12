@@ -77,42 +77,46 @@ export const Hero: React.FC = () => {
               </span>
             </motion.div>
 
-            {/* Premium Animated Headline */}
+            {/* Premium Animated Headline — Strictly 2 Lines */}
             <motion.h1
               variants={headlineContainerVariants}
               initial="hidden"
               animate="visible"
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-extrabold text-content tracking-[-2px] leading-[1.08]"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-heading font-extrabold text-content tracking-[-1px] sm:tracking-[-2px] leading-[1.12]"
             >
-              <span className="inline-block">
+              {/* Line 1 */}
+              <span className="block whitespace-nowrap">
                 {['I', 'break', 'apps', 'so', 'users'].map((word) => (
                   <motion.span
                     key={word}
                     variants={wordVariants}
-                    className="inline-block mr-[0.26em]"
+                    className="inline-block mr-[0.24em]"
                   >
                     {word}
                   </motion.span>
                 ))}
               </span>
-              <br className="hidden sm:inline" />
-              <motion.span
-                variants={neverBadgeVariants}
-                whileHover={{ scale: 1.08, rotate: -2 }}
-                whileTap={{ scale: 0.96 }}
-                className="inline-block relative overflow-hidden bg-lime-accent text-dark-bg font-black px-3 sm:px-4 py-0.5 rounded-xl mr-2.5 shadow-sm align-baseline cursor-pointer neon-lime-pulse select-none transition-shadow"
-                title="Zero critical bugs escape to production!"
-              >
-                <span className="relative z-10">never</span>
-                {/* Luminous Shimmer Light Sweep */}
-                <span
-                  className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none animate-headline-shimmer"
-                  aria-hidden="true"
-                />
-              </motion.span>
-              <motion.span variants={wordVariants} className="inline-block">
-                do.
-              </motion.span>
+
+              {/* Line 2 */}
+              <span className="block whitespace-nowrap mt-1 sm:mt-2">
+                <motion.span
+                  variants={neverBadgeVariants}
+                  whileHover={{ scale: 1.08, rotate: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="inline-block relative overflow-hidden bg-lime-accent text-dark-bg font-black px-3 sm:px-4 py-0.5 rounded-xl mr-2.5 sm:mr-3 shadow-sm align-baseline cursor-pointer neon-lime-pulse select-none transition-shadow"
+                  title="Zero critical bugs escape to production!"
+                >
+                  <span className="relative z-10">never</span>
+                  {/* Luminous Shimmer Light Sweep */}
+                  <span
+                    className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent pointer-events-none animate-headline-shimmer"
+                    aria-hidden="true"
+                  />
+                </motion.span>
+                <motion.span variants={wordVariants} className="inline-block">
+                  do.
+                </motion.span>
+              </span>
             </motion.h1>
 
             {/* Short intro line with [SQA Engineer] badge */}
