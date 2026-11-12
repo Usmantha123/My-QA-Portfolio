@@ -9,7 +9,8 @@ export default {
           bg: '#0a0a0c',
           surface: '#131317',
           border: '#24242b',
-          muted: '#8d8d98',
+          muted: '#9d9dae',
+          secondary: '#cac9d6',
           text: '#f3f2ec',
         },
         lime: {
