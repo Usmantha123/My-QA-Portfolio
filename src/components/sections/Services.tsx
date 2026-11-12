@@ -1,5 +1,16 @@
 import React from 'react';
-import { Globe, Smartphone, Server, Wallet, Building2, Layers, GraduationCap, Users } from 'lucide-react';
+import {
+  Globe,
+  Smartphone,
+  Server,
+  Wallet,
+  Building2,
+  Layers,
+  Bug,
+  ShieldCheck,
+} from 'lucide-react';
+import { Reveal } from '../ui/Reveal';
+import { Counter } from '../ui/Counter';
 
 const SERVICES = [
   {
@@ -32,30 +43,40 @@ const SERVICES = [
   },
 ];
 
+// QA Impact Metrics & Animated Stats
+// TODO: Replace with your actual numbers
 const STATS = [
   {
-    value: '3',
-    label: 'Companies',
-    sub: 'Fyno, Bitech, Khastech',
-    icon: Building2,
+    // TODO: Update your total reported bugs count
+    target: 350,
+    suffix: '+',
+    label: 'Bugs Reported',
+    sub: 'Reproducible JIRA/ClickUp tickets',
+    icon: Bug,
   },
   {
-    value: 'Web + Mobile',
-    label: 'Platforms',
-    sub: 'Android APKs & Web Apps',
+    // TODO: Update your authored test cases count
+    target: 1200,
+    suffix: '+',
+    label: 'Test Cases Written',
+    sub: 'Functional, API, & regression suites',
     icon: Layers,
   },
   {
-    value: 'BS SE',
-    label: 'Education',
-    sub: 'Islamia College Peshawar',
-    icon: GraduationCap,
+    // TODO: Update your verified projects count
+    target: 15,
+    suffix: '+',
+    label: 'Projects Tested',
+    sub: 'Web apps, Android APKs & APIs',
+    icon: ShieldCheck,
   },
   {
-    value: '500+',
-    label: 'Connections',
-    sub: 'Active QA Network',
-    icon: Users,
+    // TODO: Update your companies count
+    target: 3,
+    suffix: '',
+    label: 'Companies',
+    sub: 'Fyno, Bitech, Khastech',
+    icon: Building2,
   },
 ];
 
@@ -64,84 +85,86 @@ export const Services: React.FC = () => {
     <section id="services" className="py-20 bg-surface relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-16">
         {/* Section Header */}
-        <div className="space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-divider text-xs font-mono font-semibold text-lime-accent">
-            <span>CORE SPECIALIZATIONS</span>
+        <Reveal delay={0.1}>
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-divider text-xs font-mono font-semibold text-lime-accent">
+              <span>CORE SPECIALIZATIONS</span>
+            </div>
+            <h2 className="text-3xl sm:text-5xl font-heading font-extrabold text-content tracking-[-2px]">
+              Quality Engineering Services
+            </h2>
+            <p className="text-sm sm:text-base text-content-secondary max-w-xl">
+              Targeted manual testing, API validation, and defect management designed to keep software reliable from sprint to production.
+            </p>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-heading font-extrabold text-content tracking-[-2px]">
-            Quality Engineering Services
-          </h2>
-          <p className="text-sm sm:text-base text-content-secondary max-w-xl">
-            Targeted manual testing, API validation, and defect management designed to keep software reliable from sprint to production.
-          </p>
-        </div>
+        </Reveal>
 
-        {/* 4 Numbered Cards */}
+        {/* 4 Numbered Cards with Staggered Scroll Reveal & Hover Lift */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {SERVICES.map((srv) => {
+          {SERVICES.map((srv, idx) => {
             const Icon = srv.icon;
             return (
-              <div
-                key={srv.num}
-                className="qa-card p-6 sm:p-8 flex flex-col justify-between group"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-xs sm:text-sm font-bold text-lime-accent px-2.5 py-1 rounded bg-lime-accent/10 border border-lime-accent/20">
-                      {srv.num}
-                    </span>
-                    <div className="w-10 h-10 rounded-xl bg-surface-secondary border border-divider flex items-center justify-center text-content group-hover:text-lime-accent transition-colors">
-                      <Icon className="w-5 h-5" />
+              <Reveal key={srv.num} delay={0.12 * idx} className="h-full">
+                <div className="qa-card p-6 sm:p-8 flex flex-col justify-between group h-full hover:-translate-y-1 hover:border-lime-accent/50 hover:shadow-[0_0_24px_rgba(184,244,0,0.14)] transition-all duration-300 cursor-default">
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="font-mono text-xs sm:text-sm font-bold text-lime-accent px-2.5 py-1 rounded bg-lime-accent/10 border border-lime-accent/20">
+                        {srv.num}
+                      </span>
+                      <div className="w-10 h-10 rounded-xl bg-surface-secondary border border-divider flex items-center justify-center text-content group-hover:text-lime-accent group-hover:scale-110 transition-all">
+                        <Icon className="w-5 h-5" />
+                      </div>
                     </div>
+
+                    <h3 className="text-xl sm:text-2xl font-heading font-bold text-content tracking-tight">
+                      {srv.title}
+                    </h3>
+
+                    <p className="text-sm text-content-secondary leading-relaxed">
+                      {srv.description}
+                    </p>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-heading font-bold text-content tracking-tight">
-                    {srv.title}
-                  </h3>
-
-                  <p className="text-sm text-content-secondary leading-relaxed">
-                    {srv.description}
-                  </p>
+                  <div className="pt-6 mt-6 border-t border-divider flex flex-wrap gap-2">
+                    {srv.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-surface-secondary text-content-secondary"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-
-                <div className="pt-6 mt-6 border-t border-divider flex flex-wrap gap-2">
-                  {srv.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-0.5 rounded-full text-[11px] font-mono bg-surface-secondary text-content-secondary"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>
 
-        {/* Stats Row */}
+        {/* Animated Count-Up Stats Row */}
         <div className="pt-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {STATS.map((stat, i) => {
               const Icon = stat.icon;
               return (
-                <div
-                  key={i}
-                  className="qa-card p-5 sm:p-6 text-center space-y-2"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-surface-secondary border border-divider mx-auto flex items-center justify-center text-lime-accent mb-2">
-                    <Icon className="w-4 h-4" />
+                <Reveal key={i} delay={0.1 * i} className="h-full">
+                  <div className="qa-card p-5 sm:p-6 text-center space-y-2 h-full flex flex-col justify-between hover:-translate-y-1 hover:border-lime-accent/40 transition-all duration-300">
+                    <div>
+                      <div className="w-8 h-8 rounded-lg bg-surface-secondary border border-divider mx-auto flex items-center justify-center text-lime-accent mb-2">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <div className="text-2xl sm:text-3xl lg:text-4xl font-heading font-black text-content tracking-tight">
+                        <Counter target={stat.target} suffix={stat.suffix} />
+                      </div>
+                      <div className="font-mono text-xs font-bold text-lime-accent uppercase tracking-wider pt-1">
+                        {stat.label}
+                      </div>
+                    </div>
+                    <div className="text-[11px] text-content-secondary truncate pt-1">
+                      {stat.sub}
+                    </div>
                   </div>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-heading font-black text-content tracking-tight">
-                    {stat.value}
-                  </div>
-                  <div className="font-mono text-xs font-bold text-lime-accent uppercase tracking-wider">
-                    {stat.label}
-                  </div>
-                  <div className="text-[11px] text-content-secondary truncate">
-                    {stat.sub}
-                  </div>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -150,4 +173,3 @@ export const Services: React.FC = () => {
     </section>
   );
 };
-

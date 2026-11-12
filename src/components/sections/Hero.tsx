@@ -1,8 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { ArrowUpRight, ShieldCheck, Smartphone } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight, ShieldCheck, Smartphone, Terminal } from 'lucide-react';
 import { personalInfo } from '../../data/personal';
 import { HeroProfileFrame } from './HeroProfileFrame';
+import { TypingText } from '../ui/TypingText';
 
 const headlineContainerVariants = {
   hidden: { opacity: 0 },
@@ -44,6 +45,8 @@ const neverBadgeVariants = {
 };
 
 export const Hero: React.FC = () => {
+  const shouldReduceMotion = useReducedMotion();
+
   const handleScrollToContact = (e: React.MouseEvent) => {
     e.preventDefault();
     document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
@@ -54,28 +57,105 @@ export const Hero: React.FC = () => {
       id="home"
       className="relative pt-10 pb-16 md:pt-16 md:pb-24 qa-grid-bg overflow-hidden"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* ── 2. Subtle Animated Background (Glowing Gradient Orbs + Grid) ── */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-0" aria-hidden="true">
+        {/* Soft Neon-Lime Orb */}
+        <motion.div
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  x: [0, 25, -20, 0],
+                  y: [0, -35, 15, 0],
+                  scale: [1, 1.12, 0.95, 1],
+                }
+          }
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute -top-20 -left-20 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-lime-accent/10 blur-[110px]"
+        />
+
+        {/* Soft Cyan/Emerald Orb */}
+        <motion.div
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  x: [0, -30, 20, 0],
+                  y: [0, 25, -25, 0],
+                  scale: [1, 1.15, 1, 1],
+                }
+          }
+          transition={{
+            duration: 22,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-1/4 -right-24 w-80 sm:w-[420px] h-80 sm:h-[420px] rounded-full bg-emerald-500/10 blur-[120px]"
+        />
+
+        {/* Soft Blue Orb */}
+        <motion.div
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  x: [0, 20, -15, 0],
+                  y: [0, 20, -20, 0],
+                  scale: [0.95, 1.08, 0.95, 0.95],
+                }
+          }
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute -bottom-24 left-1/3 w-80 sm:w-96 h-80 sm:h-96 rounded-full bg-blue-500/8 blur-[130px]"
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           {/* Left Column: Headings, CTA & Trust Indicators */}
           <div className="lg:col-span-7 space-y-5 sm:space-y-6">
-            {/* "AVAILABLE FOR WORK" badge */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-divider shadow-sm"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-accent opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-accent" />
-              </span>
-              <span className="font-mono text-[11px] font-bold tracking-wider text-content uppercase">
-                AVAILABLE FOR WORK
-              </span>
-              <span className="text-content-secondary font-mono text-[11px]">
-                &bull; {personalInfo.location}
-              </span>
-            </motion.div>
+            {/* Top Badges Row */}
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+              {/* "AVAILABLE FOR WORK" badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-divider shadow-sm"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-accent opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-lime-accent" />
+                </span>
+                <span className="font-mono text-[11px] font-bold tracking-wider text-content uppercase">
+                  AVAILABLE FOR WORK
+                </span>
+                <span className="text-content-secondary font-mono text-[11px]">
+                  &bull; {personalInfo.location}
+                </span>
+              </motion.div>
+
+              {/* 1. Cycling Typing Effect Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-card border border-divider shadow-sm"
+              >
+                <Terminal className="w-3.5 h-3.5 text-lime-accent" />
+                <TypingText
+                  words={['SQA Engineer', 'API Tester', 'Bug Hunter', 'Fintech QA Specialist']}
+                  className="text-lime-accent font-bold text-[11px]"
+                />
+              </motion.div>
+            </div>
 
             {/* Premium Animated Headline — Strictly 2 Lines */}
             <motion.h1
@@ -133,33 +213,37 @@ export const Hero: React.FC = () => {
               focused on web, Android, and API testing with Postman. I find edge cases, report high-impact bugs, and give release teams the confidence to ship with quality.
             </motion.p>
 
-            {/* Two Action Buttons */}
+            {/* Two Action Buttons with subtle hover/tap scale */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
               className="flex flex-wrap items-center gap-3 sm:gap-4 pt-1"
             >
-              <a
+              <motion.a
                 href="#contact"
                 onClick={handleScrollToContact}
-                className="inline-flex items-center gap-1.5 px-6 py-3.5 rounded-xl bg-lime-accent text-dark-bg font-heading font-bold text-sm sm:text-base hover:brightness-105 active:scale-95 transition-all shadow-sm cursor-pointer"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-1.5 px-6 py-3.5 rounded-xl bg-lime-accent text-dark-bg font-heading font-bold text-sm sm:text-base hover:brightness-105 transition-all shadow-sm cursor-pointer"
               >
                 <span>Let&apos;s work together</span>
                 <ArrowUpRight className="w-4 h-4" />
-              </a>
+              </motion.a>
 
-              <a
+              <motion.a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl bg-surface-card border border-divider hover:border-lime-accent text-content font-heading font-bold text-sm sm:text-base transition-colors cursor-pointer"
               >
                 <span className="w-4 h-4 rounded bg-[#0077b5] text-white flex items-center justify-center font-mono font-bold text-[10px] shrink-0">
                   in
                 </span>
                 <span>LinkedIn</span>
-              </a>
+              </motion.a>
             </motion.div>
 
             {/* Micro QA Trust Row with dividers */}

@@ -1,7 +1,7 @@
 import React, { forwardRef, type ReactNode } from 'react';
 import { motion, type HTMLMotionProps } from 'framer-motion';
 
-export type CardGlow = 'none' | 'blue' | 'purple';
+export type CardGlow = 'none' | 'lime' | 'blue' | 'purple';
 
 export interface CardProps extends HTMLMotionProps<'div'> {
   children: ReactNode;
@@ -12,6 +12,7 @@ export interface CardProps extends HTMLMotionProps<'div'> {
 
 const glowStyles: Record<CardGlow, string> = {
   none: '',
+  lime: 'shadow-[0_0_25px_rgba(184,244,0,0.18)] border-lime-accent/50',
   blue: 'glow-blue',
   purple: 'glow-purple',
 };

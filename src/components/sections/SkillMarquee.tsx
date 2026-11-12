@@ -24,7 +24,7 @@ export const SkillMarquee: React.FC = () => {
           {SKILLS_LIST.map((skill, index) => (
             <div
               key={`t1-${index}`}
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-surface-card border border-divider hover:border-lime-accent text-xs sm:text-sm font-mono font-medium text-content whitespace-nowrap transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-surface-card border border-divider hover:border-lime-accent hover:shadow-[0_0_15px_rgba(184,244,0,0.22)] hover:-translate-y-0.5 text-xs sm:text-sm font-mono font-medium text-content whitespace-nowrap transition-all duration-200 shadow-sm cursor-default"
             >
               <CheckCircle2 className="w-3.5 h-3.5 text-lime-accent shrink-0" />
               <span>{skill}</span>
@@ -37,7 +37,7 @@ export const SkillMarquee: React.FC = () => {
           {SKILLS_LIST.map((skill, index) => (
             <div
               key={`t2-${index}`}
-              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-surface-card border border-divider hover:border-lime-accent text-xs sm:text-sm font-mono font-medium text-content whitespace-nowrap transition-colors shadow-sm"
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 rounded-full bg-surface-card border border-divider hover:border-lime-accent hover:shadow-[0_0_15px_rgba(184,244,0,0.22)] hover:-translate-y-0.5 text-xs sm:text-sm font-mono font-medium text-content whitespace-nowrap transition-all duration-200 shadow-sm cursor-default"
             >
               <CheckCircle2 className="w-3.5 h-3.5 text-lime-accent shrink-0" />
               <span>{skill}</span>

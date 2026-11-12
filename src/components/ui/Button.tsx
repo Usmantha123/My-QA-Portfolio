@@ -38,13 +38,13 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantClasses = {
     primary:
-      'bg-gradient-to-r from-blue-600 to-violet-600 text-white font-medium shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:brightness-110 border border-white/10',
+      'bg-lime-accent text-dark-bg font-heading font-bold shadow-sm hover:brightness-105 transition-all',
     secondary:
-      'glass text-content hover:bg-surface-secondary/80 border border-divider hover:border-blue-500/40',
+      'bg-surface-card text-content hover:bg-surface-secondary border border-divider hover:border-lime-accent transition-colors',
     outline:
-      'border border-blue-500/40 text-blue-400 hover:bg-blue-500/10 hover:border-blue-500',
+      'border border-divider text-content hover:border-lime-accent hover:text-lime-accent transition-colors',
     ghost:
-      'text-content-secondary hover:text-content hover:bg-white/5',
+      'text-content-secondary hover:text-content hover:bg-surface-card transition-colors',
   }[variant];
 
   const combinedClasses = `inline-flex items-center justify-center gap-2 rounded-xl font-heading transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${sizeClasses} ${variantClasses} ${className}`;

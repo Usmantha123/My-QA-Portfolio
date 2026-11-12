@@ -10,6 +10,8 @@ import {
   GraduationCap,
 } from 'lucide-react';
 import { personalInfo } from '../../data/personal';
+import { Reveal } from '../ui/Reveal';
+import { LottieQA } from '../ui/LottieQA';
 
 const COMPETENCIES = [
   {
@@ -95,125 +97,139 @@ export const About: React.FC = () => {
           {/* ── Left Column (Profile Card + How I Approach Quality) ── */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-6">
             {/* Card 1: Profile Card */}
-            <div className="qa-card p-6 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 bg-surface-card border border-divider">
-              {/* Photo in rounded rectangle with subtle border */}
-              <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-2xl overflow-hidden border border-divider shadow-sm bg-surface-secondary">
-                <img
-                  src={personalInfo.photoUrl}
-                  alt={personalInfo.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Info Column */}
-              <div className="space-y-1.5 text-center sm:text-left flex-1 min-w-0">
-                <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black bg-lime-accent text-dark-bg tracking-wide uppercase">
-                  SQA ENGINEER
-                </span>
-                <h3 className="text-2xl font-heading font-extrabold text-content tracking-tight">
-                  {personalInfo.name}
-                </h3>
-                <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-content-secondary font-mono">
-                  <MapPin className="w-3.5 h-3.5 text-content-muted shrink-0" />
-                  <span>{personalInfo.location}</span>
+            <Reveal delay={0.1}>
+              <div className="qa-card p-6 flex flex-col sm:flex-row items-center gap-5 sm:gap-6 bg-surface-card border border-divider hover:border-lime-accent/40 transition-colors">
+                {/* Photo in rounded rectangle with subtle border */}
+                <div className="w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-2xl overflow-hidden border border-divider shadow-sm bg-surface-secondary">
+                  <img
+                    src={personalInfo.photoUrl}
+                    alt={personalInfo.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-                <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-lime-accent font-mono font-semibold pt-0.5">
-                  <GraduationCap className="w-3.5 h-3.5 shrink-0" />
-                  <span>BS Software Engineering (2020-2024)</span>
+
+                {/* Info Column */}
+                <div className="space-y-1.5 text-center sm:text-left flex-1 min-w-0">
+                  <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black bg-lime-accent text-dark-bg tracking-wide uppercase">
+                    SQA ENGINEER
+                  </span>
+                  <h3 className="text-2xl font-heading font-extrabold text-content tracking-tight">
+                    {personalInfo.name}
+                  </h3>
+                  <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-content-secondary font-mono">
+                    <MapPin className="w-3.5 h-3.5 text-content-muted shrink-0" />
+                    <span>{personalInfo.location}</span>
+                  </div>
+                  <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs text-lime-accent font-mono font-semibold pt-0.5">
+                    <GraduationCap className="w-3.5 h-3.5 shrink-0" />
+                    <span>BS Software Engineering (2020-2024)</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
-            {/* Card 2: How I Approach Quality */}
-            <div className="qa-card p-6 sm:p-7 space-y-3.5 bg-surface-card border border-divider flex-1 flex flex-col justify-center">
-              <h4 className="text-lg font-heading font-bold text-content flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-amber-400" />
-                <span>How I Approach Quality</span>
-              </h4>
-              <p className="text-xs sm:text-[13px] text-content-secondary leading-relaxed">
-                I&apos;m an SQA Engineer specializing in web, mobile (Android), and API testing with Postman. I focus on finding high-impact defects before release.
-              </p>
-              <p className="text-xs sm:text-[13px] text-content-secondary leading-relaxed">
-                I test real user flows, validate complex payment and ad-integrated features, write clear, reproducible bug reports in JIRA and ClickUp, and run rigorous regression cycles to keep every release stable and reliable.
-              </p>
-            </div>
+            {/* Card 2: How I Approach Quality + Lottie QA Radar Animation */}
+            <Reveal delay={0.2} className="flex-1 flex flex-col">
+              <div className="qa-card p-6 sm:p-7 space-y-3.5 bg-surface-card border border-divider flex-1 flex flex-col justify-center relative overflow-hidden">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-lg font-heading font-bold text-content flex items-center gap-2">
+                    <ShieldCheck className="w-5 h-5 text-amber-400 shrink-0" />
+                    <span>How I Approach Quality</span>
+                  </h4>
+                  {/* Lottie QA Testing Animation */}
+                  <div title="Continuous QA Radar & Verification">
+                    <LottieQA className="w-8 h-8 opacity-90" />
+                  </div>
+                </div>
+                <p className="text-xs sm:text-[13px] text-content-secondary leading-relaxed">
+                  I&apos;m an SQA Engineer specializing in web, mobile (Android), and API testing with Postman. I focus on finding high-impact defects before release.
+                </p>
+                <p className="text-xs sm:text-[13px] text-content-secondary leading-relaxed">
+                  I test real user flows, validate complex payment and ad-integrated features, write clear, reproducible bug reports in JIRA and ClickUp, and run rigorous regression cycles to keep every release stable and reliable.
+                </p>
+              </div>
+            </Reveal>
           </div>
 
           {/* ── Right Column (Core Competencies + Tools & Stack) ── */}
           <div className="lg:col-span-7 flex flex-col justify-between gap-6">
-            {/* Card 3: Core Competencies (3 Columns x 2 Rows) */}
-            <div className="qa-card p-6 sm:p-7 space-y-4 bg-surface-card border border-divider">
-              <div className="flex items-center justify-between border-b border-divider pb-3">
-                <h4 className="text-lg font-heading font-bold text-content tracking-tight">
-                  Core Competencies
-                </h4>
-                <span className="text-[11px] font-mono text-lime-accent font-bold uppercase tracking-wider">
-                  HANDS-ON
-                </span>
-              </div>
+            {/* Card 3: Core Competencies (3 Columns x 2 Rows) with Hover Lift & Soft Glow */}
+            <Reveal delay={0.2}>
+              <div className="qa-card p-6 sm:p-7 space-y-4 bg-surface-card border border-divider">
+                <div className="flex items-center justify-between border-b border-divider pb-3">
+                  <h4 className="text-lg font-heading font-bold text-content tracking-tight">
+                    Core Competencies
+                  </h4>
+                  <span className="text-[11px] font-mono text-lime-accent font-bold uppercase tracking-wider">
+                    HANDS-ON
+                  </span>
+                </div>
 
-              {/* 3-Column Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-                {COMPETENCIES.map((comp, idx) => {
-                  const Icon = comp.icon;
-                  return (
+                {/* 3-Column Grid with Staggered Delays & Glow Hover */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                  {COMPETENCIES.map((comp, idx) => {
+                    const Icon = comp.icon;
+                    return (
+                      <div
+                        key={idx}
+                        className="p-3.5 rounded-xl bg-surface-secondary/70 border border-divider hover:border-lime-accent hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(184,244,0,0.18)] transition-all duration-300 flex flex-col justify-between space-y-2 group cursor-default"
+                      >
+                        <div className="w-8 h-8 rounded-lg bg-surface-card border border-divider flex items-center justify-center text-lime-accent group-hover:scale-110 transition-transform">
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <div className="space-y-1">
+                          <h5 className="text-xs sm:text-[13px] font-heading font-bold text-content leading-snug">
+                            {comp.name}
+                          </h5>
+                          <p className="text-[11px] text-content-secondary leading-snug">
+                            {comp.desc}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Card 4: Tools & Stack (4 Columns) with Hover Lift */}
+            <Reveal delay={0.3}>
+              <div className="qa-card p-6 sm:p-7 space-y-4 bg-surface-card border border-divider">
+                <div className="flex items-center justify-between border-b border-divider pb-3">
+                  <h4 className="text-lg font-heading font-bold text-content tracking-tight">
+                    Tools &amp; Stack
+                  </h4>
+                  <span className="text-[11px] font-mono text-content-secondary uppercase tracking-wider">
+                    DAILY USE
+                  </span>
+                </div>
+
+                {/* 4 Columns in 1 Row */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {TOOLS.map((tool, idx) => (
                     <div
                       key={idx}
-                      className="p-3.5 rounded-xl bg-surface-secondary/70 border border-divider hover:border-lime-accent/40 transition-colors flex flex-col justify-between space-y-2 group"
+                      className="p-3 rounded-xl bg-surface-secondary/70 border border-divider hover:border-lime-accent/50 hover:-translate-y-1 hover:shadow-sm transition-all duration-300 flex flex-col items-start space-y-2 cursor-default group"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-surface-card border border-divider flex items-center justify-center text-lime-accent group-hover:scale-105 transition-transform">
-                        <Icon className="w-4 h-4" />
+                      <div
+                        className="w-8 h-8 rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform"
+                        style={{ backgroundColor: `${tool.color}15` }}
+                      >
+                        <span style={{ color: tool.color }}>{tool.icon}</span>
                       </div>
-                      <div className="space-y-1">
-                        <h5 className="text-xs sm:text-[13px] font-heading font-bold text-content leading-snug">
-                          {comp.name}
-                        </h5>
-                        <p className="text-[11px] text-content-secondary leading-snug">
-                          {comp.desc}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* Card 4: Tools & Stack (4 Columns) */}
-            <div className="qa-card p-6 sm:p-7 space-y-4 bg-surface-card border border-divider">
-              <div className="flex items-center justify-between border-b border-divider pb-3">
-                <h4 className="text-lg font-heading font-bold text-content tracking-tight">
-                  Tools &amp; Stack
-                </h4>
-                <span className="text-[11px] font-mono text-content-secondary uppercase tracking-wider">
-                  DAILY USE
-                </span>
-              </div>
-
-              {/* 4 Columns in 1 Row */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                {TOOLS.map((tool, idx) => (
-                  <div
-                    key={idx}
-                    className="p-3 rounded-xl bg-surface-secondary/70 border border-divider hover:border-lime-accent/40 transition-colors flex flex-col items-start space-y-2"
-                  >
-                    <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center"
-                      style={{ backgroundColor: `${tool.color}15` }}
-                    >
-                      <span style={{ color: tool.color }}>{tool.icon}</span>
-                    </div>
-                    <div className="min-w-0">
-                      <div className="font-heading font-bold text-xs sm:text-sm text-content">
-                        {tool.name}
-                      </div>
-                      <div className="text-[10px] font-mono text-content-secondary truncate">
-                        {tool.category}
+                      <div className="min-w-0">
+                        <div className="font-heading font-bold text-xs sm:text-sm text-content">
+                          {tool.name}
+                        </div>
+                        <div className="text-[10px] font-mono text-content-secondary truncate">
+                          {tool.category}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </div>
