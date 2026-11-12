@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Sun, Moon, Menu, X, ArrowUpRight } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
-import { personalInfo } from '../data/personal';
+import { useTheme } from '../../context/ThemeContext';
+import { personalInfo } from '../../data/personal';
 
 const navItems = [
   { name: 'About', href: '#about' },
@@ -24,48 +24,48 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-surface/80 border-b border-divider transition-colors duration-200">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-surface/85 border-b border-divider transition-colors duration-200">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-18 items-center justify-between py-3">
-          {/* Logo: "TU Talha Usman" with TU in lime badge */}
+        <div className="flex h-16 sm:h-18 items-center justify-between">
+          {/* Logo: [TU] Talha Usman [ SQA ] */}
           <a
             href="#home"
             onClick={(e) => handleNavClick(e, '#home')}
-            className="flex items-center gap-2.5 group"
+            className="flex items-center gap-2.5 sm:gap-3 group"
             aria-label="Talha Usman Homepage"
           >
-            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-lime-accent text-dark-bg font-mono font-black text-xs tracking-tight shadow-[2px_2px_0px_#24242b] group-hover:scale-105 transition-transform">
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-lime-accent text-dark-bg font-mono font-black text-xs tracking-tight shadow-sm group-hover:scale-105 transition-transform">
               TU
             </span>
             <span className="font-heading font-extrabold text-content text-base sm:text-lg tracking-tight">
               Talha Usman
             </span>
-            <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-surface-card border border-divider text-content-secondary">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-mono font-semibold bg-surface-card border border-divider text-content-secondary">
               SQA
             </span>
           </a>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          {/* Center Nav Links */}
+          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
             {navItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="px-3.5 py-1.5 rounded-full text-sm font-medium text-content-secondary hover:text-content hover:bg-surface-card/60 transition-colors"
+                className="text-sm font-medium text-content-secondary hover:text-content transition-colors"
               >
                 {item.name}
               </a>
             ))}
           </nav>
 
-          {/* Right Actions: Theme Toggle + Hire Me Pill */}
+          {/* Right Actions: Theme Toggle + Hire Me */}
           <div className="flex items-center gap-2.5 sm:gap-3">
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              className="p-2 rounded-xl bg-surface-card border border-divider text-content-secondary hover:text-content transition-colors"
+              className="w-9 h-9 rounded-full bg-surface-card border border-divider flex items-center justify-center text-content-secondary hover:text-content transition-colors"
             >
               {theme === 'dark' ? (
                 <Sun className="w-4 h-4 text-amber-300" />
@@ -74,13 +74,13 @@ export const Navbar: React.FC = () => {
               )}
             </button>
 
-            {/* Lime "Hire me" pill button */}
+            {/* Lime "Hire Me ↗" Pill Button */}
             <a
               href="#contact"
               onClick={(e) => handleNavClick(e, '#contact')}
-              className="inline-flex items-center gap-1.5 px-4 sm:px-5 py-2 rounded-full bg-lime-accent text-dark-bg font-heading font-bold text-xs sm:text-sm shadow-lime-offset hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all active:scale-95"
+              className="inline-flex items-center gap-1 px-4 sm:px-5 py-2 rounded-full bg-lime-accent text-dark-bg font-heading font-bold text-xs sm:text-sm hover:brightness-105 hover:scale-[1.02] active:scale-95 transition-all shadow-sm"
             >
-              <span>Hire me</span>
+              <span>Hire Me</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
 

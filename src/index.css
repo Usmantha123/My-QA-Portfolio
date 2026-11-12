@@ -46,6 +46,13 @@
   color: #2e4700;
 }
 
+/* Ensure lime accent remains neon inside inherently dark cards/terminals */
+[data-theme="light"] .bg-dark-bg .text-lime-accent,
+[data-theme="light"] .bg-dark-surface .text-lime-accent,
+[data-theme="light"] [class*="bg-dark"] .text-lime-accent {
+  color: #b8f400 !important;
+}
+
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
     --color-bg: #f7f6f0;
@@ -68,6 +75,12 @@
 
   :root:not([data-theme="dark"]) .text-lime-accent {
     color: #2e4700;
+  }
+
+  :root:not([data-theme="dark"]) .bg-dark-bg .text-lime-accent,
+  :root:not([data-theme="dark"]) .bg-dark-surface .text-lime-accent,
+  :root:not([data-theme="dark"]) [class*="bg-dark"] .text-lime-accent {
+    color: #b8f400 !important;
   }
 }
 
